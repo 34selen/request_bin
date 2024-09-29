@@ -4,39 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Request Logs</title>
-    <meta http-equiv="refresh" content="3" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/static/images/favicon-96x96.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              customBlue: "#6B7AF7",
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body>
-    <h1>Request Logs</h1>
-    <p>Below is a list of all requests received by the server:</p>
+  <body class="bg-gray-200 h-screen flex flex-col">
+    <!-- 상단 헤더 -->
+    <div class="justify-center flex h-16">
+      <h1 class="text-customBlue text-5xl font-bold">se1en's Request Bins</h1>
+    </div>
 
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Timestamp</th>
-          <th>Method</th>
-          <th>Path</th>
-          <th>Headers</th>
-          <th>Body</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for log in logs %}
-        <tr>
-          <td>{{ log.timestamp }}</td>
-          <td>{{ log.method }}</td>
-          <td>{{ log.path }}</td>
-          <td>
-            <ul>
-              {% for key, value in log.headers.items() %}
-              <li><strong>{{ key }}:</strong> {{ value }}</li>
-              {% endfor %}
-            </ul>
-          </td>
-          <td>{{ log.body }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="flex-grow flex items-center justify-center">
+      <div class="flex bg-white rounded-3xl h-4/5 w-4/5">
+        <div class="flex flex-col w-1/4 p-5">
+          <div class="flex-grow flex justify-center h-1/7">
+            <div class="flex flex-col w-1/2 items-center">시간</div>
+            <div class="flex flex-col w-1/2 items-center">경로</div>
+          </div>
+
+          {% for log in logs %}
+          <div class="flex-grow flex justify-center h-10px">
+            <div class="w-1/2 items-center">{{ log.timestamp }}</div>
+            <div class="w-1/2 items-center">{{ log.path }}</div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="border-l border-gray-300 h-full"></div>
+
+        <div class="flex w-3/4 p-5">
+          <!-- 오른쪽 요소 -->
+          <h2 class="text-lg font-semibold">오른쪽 요소</h2>
+          <p>여기에 오른쪽 내용이 들어갑니다.</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
