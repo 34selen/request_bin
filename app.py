@@ -1,5 +1,6 @@
-from flask import Flask, request, jsonify,render_template
+from flask import Flask, request, jsonify,render_template,send_from_directory
 import datetime
+import os
 
 app = Flask(__name__)
 
@@ -16,7 +17,7 @@ def log_request_info():
         "body": request.get_data(as_text=True),
         "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
-    if(log_entry['path'] !='/requests' and log_entry['path'] !='/favicon.ico'):
+    if(log_entry['path'] !='/requests' and log_entry['path'] !='/favicon.ico' ):
         request_log.append(log_entry)
     print(f"Logged Request: {log_entry}")
 
