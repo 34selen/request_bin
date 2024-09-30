@@ -46,7 +46,7 @@
           </div>
 
           <div
-            class="flex flex-col max-h-3-5 h-3/5 items-start overflow-y-auto"
+            class="flex flex-col max-h-3-5 h-4/5 items-start overflow-y-auto"
           >
             {% for log in logs |reverse %}
             <div
@@ -77,16 +77,18 @@
 
         <div class="border-l border-gray-300 h-full"></div>
 
-        <div class="flex flex-col w-3/4 p-5">
+        <div class="flex flex-col w-3/4 p-5 overflow-y-auto break-words">
           <!-- 오른쪽 요소 -->
           <div>
             <div class="text-3xl font-spoqa font-bold">My Request</div>
           </div>
           <div>
             <div class="text-3xl font-spoqa font-bold">Headers</div>
+            <div id="headers" class="text-sm"></div>
           </div>
           <div>
             <div class="text-3xl font-spoqa font-bold">Body</div>
+            <div id="Body" class="text-sm"></div>
           </div>
         </div>
       </div>
@@ -103,8 +105,16 @@
         const log = logs[index];
         console.log(log)
         // log 정보를 화면에 출력
-       // const detailsDiv = document.getElementById('logDetails');
-       // detailsDiv.innerHTML = `<p>Timestamp: ${log.timestamp}</p><p>Path: ${log.path}</p>`;
+
+        const headers = document.getElementById('headers');
+        let headersContent = Object.entries(log.headers)
+      .map(([key, value]) => `<span class="text-xl font-spoqa font-bold text-customBlue">${key}</span>: ${value}`)
+      .join('<br>');
+      let bodyContent = Object.entries(log.body)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join('<br>');
+        headers.innerHTML = headersContent;
+        body.innerHTML = bodyContent;
       }
     </script>
   </body>

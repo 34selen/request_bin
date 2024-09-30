@@ -15,7 +15,8 @@ def log_request_info():
         "path": request.path,
         "headers": dict(request.headers),
         "body": request.get_data(as_text=True),
-        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "ip": request.remote_addr 
     }
     if(log_entry['path'] !='/requests' and log_entry['path'] !='/favicon.ico' ):
         request_log.append(log_entry)
