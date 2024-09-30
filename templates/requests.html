@@ -33,7 +33,7 @@
   </head>
   <body class="bg-gray-200 h-screen flex flex-col">
     <!-- 상단 헤더 -->
-    <div class="justify-center flex h-16">
+    <div class="justify-center flex h-16 mt-4">
       <h1 class="text-customBlue text-5xl font-bold">se1en's Request Bins</h1>
     </div>
 
@@ -45,10 +45,14 @@
             <div class="flex flex-col w-1/2 items-center">경로</div>
           </div>
 
-          <div class="flex flex-col max-h-3-5 items-start overflow-y-auto">
-            {% for log in logs %}
+          <div
+            class="flex flex-col max-h-3-5 h-3/5 items-start overflow-y-auto"
+          >
+            {% for log in logs |reverse %}
             <div
               class="flex w-full justify-between items-center my-1 hover:bg-customBlue transition-colors hover:text-white"
+              data-index="{{ loop.index0 }}"
+              onclick="showLogDetails(this)"
             >
               <div
                 class="w-1/2 h-12 flex items-center justify-center text-center"
@@ -56,7 +60,7 @@
                 {{ log.timestamp }}
               </div>
               <div
-                class="w-1/2 h-12 flex items-center justify-center text-center"
+                class="w-1/2 h-12 flex items-center justify-center text-center overflow-hidden"
               >
                 {{ log.path }}
               </div>
@@ -87,5 +91,21 @@
         </div>
       </div>
     </div>
+    <script>
+      // logs 데이터는 서버에서 제공한 JSON으로 설정합니다.
+      const logs = {{ logs | tojson }};
+
+      function showLogDetails(logElement) {
+        // data-index 속성에서 인덱스를 가져옵니다.
+        const index = logElement.getAttribute('data-index');
+
+        // logs 배열에서 해당 인덱스에 해당하는 log를 가져옵니다.
+        const log = logs[index];
+        console.log(log)
+        // log 정보를 화면에 출력
+       // const detailsDiv = document.getElementById('logDetails');
+       // detailsDiv.innerHTML = `<p>Timestamp: ${log.timestamp}</p><p>Path: ${log.path}</p>`;
+      }
+    </script>
   </body>
 </html>
