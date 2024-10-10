@@ -70,6 +70,7 @@
           </div>
           <button
             class="mt-3 bg-customBlue text-white font-bold py-2 px-4 rounded transition-colors hover:bg-blue-600"
+            onclick="fetch('/reset', { method: 'POST' }).then(() => location.reload());"
           >
             리셋
           </button>
@@ -81,6 +82,25 @@
           <!-- 오른쪽 요소 -->
           <div>
             <div class="text-3xl font-spoqa font-bold">My Request</div>
+            <span class="text-xl font-spoqa font-bold text-customBlue">IP</span
+            >:
+            <span id="IP"></span>
+            <br />
+            <span class="text-xl font-spoqa font-bold text-customBlue">
+              Method </span
+            >:
+            <span id="Method"></span>
+            <br />
+            <span class="text-xl font-spoqa font-bold text-customBlue">
+              Path</span
+            >:
+            <span id="Path"></span>
+            <br />
+            <span class="text-xl font-spoqa font-bold text-customBlue">
+              QueryString </span
+            >:
+            <span id="QueryString"></span>
+            <br />
           </div>
           <div>
             <div class="text-3xl font-spoqa font-bold">Headers</div>
@@ -106,7 +126,9 @@
         console.log(log)
         // log 정보를 화면에 출력
 
+        //해더 출력
         const headers = document.getElementById('headers');
+        const bodys = document.getElementById('Body');
         let headersContent = Object.entries(log.headers)
       .map(([key, value]) => `<span class="text-xl font-spoqa font-bold text-customBlue">${key}</span>: ${value}`)
       .join('<br>');
@@ -114,7 +136,19 @@
       .map(([key, value]) => `${key}: ${value}`)
       .join('<br>');
         headers.innerHTML = headersContent;
-        body.innerHTML = bodyContent;
+        bodys.innerHTML = bodyContent;
+        //ip출력
+        const ipElement  = document.getElementById('IP');
+        ipElement.innerHTML=log.ip
+        //Method출력
+        const MethodElement  = document.getElementById('Method');
+        MethodElement.innerHTML=log.method
+        //Path출력
+        const PathElement  = document.getElementById('Path');
+        PathElement.innerHTML=log.path
+        //QueryString출력
+        const QueryStringElement  = document.getElementById('QueryString');
+        QueryStringElement.innerHTML=log.query_string
       }
     </script>
   </body>
