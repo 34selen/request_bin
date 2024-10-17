@@ -101,6 +101,11 @@
             >:
             <span id="QueryString"></span>
             <br />
+            <span class="text-xl font-spoqa font-bold text-customBlue">
+              Cookie </span
+            >:
+            <span id="Cookie"></span>
+            <br />
           </div>
           <div>
             <div class="text-3xl font-spoqa font-bold">Headers</div>
@@ -149,6 +154,12 @@
         //QueryString출력
         const QueryStringElement  = document.getElementById('QueryString');
         QueryStringElement.innerHTML=log.query_string
+        //Body출력
+        const BodyElement  = document.getElementById('Body');
+        BodyElement.innerHTML=log.body
+        //Cookie출력
+        const CookieElement  = document.getElementById('Cookie');
+        CookieElement.innerHTML=log.cookies
       }
     </script>
   </body>

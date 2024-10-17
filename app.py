@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, send_from_directory,
 import datetime
 import os
 from dotenv import load_dotenv
-
+from werkzeug.datastructures import ImmutableMultiDict
 app = Flask(__name__)
 load_dotenv()
 # 요청을 저장할 리스트
@@ -17,6 +17,7 @@ def log_request_info():
     log_entry = {
         "method": request.method,
         "path": request.path,
+        "cookies": str(request.cookies.to_dict()),
         "headers": dict(request.headers),
         "body": request.get_data(as_text=True),
         "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
