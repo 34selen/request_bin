@@ -9,6 +9,7 @@
       href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <script>
       tailwind.config = {
@@ -48,7 +49,7 @@
           <div
             class="flex flex-col max-h-3-5 h-4/5 items-start overflow-y-auto"
           >
-            {% for log in logs |reverse %}
+            {% for log in logs%}
             <div
               class="flex w-full justify-between items-center my-1 hover:bg-customBlue transition-colors hover:text-white"
               data-index="{{ loop.index0 }}"
@@ -128,15 +129,15 @@
 
         // logs 배열에서 해당 인덱스에 해당하는 log를 가져옵니다.
         const log = logs[index];
-        console.log(log)
         // log 정보를 화면에 출력
 
         //해더 출력
         const headers = document.getElementById('headers');
         const bodys = document.getElementById('Body');
-        let headersContent = Object.entries(log.headers)
+       let headersContent = Object.entries(JSON.parse(log.headers)) // JSON 문자열 -> 객체 변환
       .map(([key, value]) => `<span class="text-xl font-spoqa font-bold text-customBlue">${key}</span>: ${value}`)
       .join('<br>');
+
       let bodyContent = Object.entries(log.body)
       .map(([key, value]) => `${key}: ${value}`)
       .join('<br>');
